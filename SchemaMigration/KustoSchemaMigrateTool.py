@@ -93,9 +93,9 @@ class KustoImportUtility:
             self._kcsb = KustoConnectionStringBuilder.with_az_cli_authentication(
                 target_cluster)
         else:
-            from azure.common.credentials import ServicePrincipalCredentials
-            self._credentials = ServicePrincipalCredentials(
-                client_id=aad_client_id, secret=aad_client_secret, tenant=aad_tenant_id)
+            from azure.identity import ClientSecretCredential
+            self._credentials = ClientSecretCredential(
+                client_id=aad_client_id, client_secret=aad_client_secret, tenant_id=aad_tenant_id)
             self._kcsb = KustoConnectionStringBuilder.with_aad_application_key_authentication(
                 target_cluster, aad_client_id, aad_client_secret, aad_tenant_id)
 
