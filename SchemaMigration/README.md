@@ -1,5 +1,5 @@
 # Schema Migration Tool
-This tool is created to export the definition of databases in a source Azure Data Explorer cluster, and import into a target cluster.
+This tool is created to export the definition of databases from a source Azure Data Explorer cluster, and import into a target cluster.
 
 # What will be done for export
 1. The export will include policies, tables, functions, materialized views, ingestion mappings, etc. 
