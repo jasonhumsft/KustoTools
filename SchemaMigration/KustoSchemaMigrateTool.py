@@ -17,7 +17,7 @@ class KustoExportUtility:
     query_db_definition = ".show database schema as csl script "
     query_ingestion_mapping = ".show database ingestion mappings"
 
-    def __init__(self, cluster: str, default_database: str, az_cli_auth: bool = True, aad_client_id: str = None, aad_client_secret: str = None, aad_tenant_id: str = None) -> None:
+    def __init__(self, cluster: str, default_database: str = "NetDefaultDB", az_cli_auth: bool = True, aad_client_id: str = None, aad_client_secret: str = None, aad_tenant_id: str = None) -> None:
         if az_cli_auth:
             self._kcsb = KustoConnectionStringBuilder.with_az_cli_authentication(
                 cluster)
@@ -204,8 +204,8 @@ def args_parser() -> argparse.ArgumentParser:
                         'export', 'import', 'migrate'], help=action_help)
     parser.add_argument('-z', '--azure_cli_authentication',
                         action='store_true', help="To use AZ CLI authentication")
-    parser.add_argument('-d', '--connection_db', type=str,
-                        help="The default database for connection (mandatory for export or migrate)")
+    parser.add_argument('-d', '--connection_db', type=str, default="NetDefaultDB",
+                        help="The default database to connect during export or migration (default=NetDefaultDB)")
     parser.add_argument('-a', '--aad_app_id', type=str,
                         help="AAD app id (mandatory if you don't use AZ CLI authentication)")
     parser.add_argument('-s', '--aad_app_secret', type=str,
